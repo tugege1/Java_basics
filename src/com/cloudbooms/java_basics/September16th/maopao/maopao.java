@@ -1,4 +1,4 @@
-package com.cloudbooms.java_basics.September15th.maopao;
+package com.cloudbooms.java_basics.September16th.maopao;
 
 public class maopao {
     public static void main(String[] args) {
