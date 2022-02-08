@@ -9,7 +9,7 @@ public class Cocktail {
     public static void main(String[] args) {
 
         //从左到右排序数组
-        //int[] array = {11, 22, 33, 55, 66, 77, 88, 99,};
+        //int[] array = {11, 22, 33, 55, 66, 77, 88, 99};
         //从右到左排序数组
         int[] array = {11, 22, 33, 55, 66, 77, 99, 88};
 
