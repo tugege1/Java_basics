@@ -1,6 +1,9 @@
 package com.cloudbooms.basics_test2022.paixu;
 
 /**
+ * 鸡尾酒排序
+ * 双方的元素比较和交换，减少排序的次数，缺点是代码量大，时间复杂度也是O(n²)
+ *
  * @author Tu
  * @date 2022/2/8 18:07
  */
