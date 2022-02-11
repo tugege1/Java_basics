@@ -8,11 +8,11 @@ package com.cloudbooms.basics_test2022.paixu;
  * @date 2022/2/8 18:07
  */
 public class MaoPaoPlus {
+
     public static void main(String[] args) {
 
         //int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int[] array = {8, 5, 4, 2, 9, 7, 6, 3, 1};
-
         for (int arr : array) {
             System.out.println(arr);
         }
@@ -58,6 +58,6 @@ public class MaoPaoPlus {
         for (int arr : array) {
             System.out.println(arr);
         }
-
     }
+
 }

@@ -2,15 +2,15 @@ package com.cloudbooms.basics_test2022.paixu;
 
 /**
  * 插入排序
- * 定义待插入的数，外层圈数。
- * 再定义一个待插入数的前一个数下标，拿插入数与前面的数一一比较，最后交换
+ * 在要排序的一组数组中，将某个数插入到指定的位置，完成排序
+ * 思路：遍历数组，每次从第二个数往前插入。如果插入数小于当前数，则将当前数向后移一位。
  *
  * @author Tu
  * @date 2022/2/9 10:24
  */
 public class ChaRu {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         int[] array = {8, 5, 4, 2, 9, 7, 6, 3, 1};
         for (int arr : array) {
             System.out.println(arr);
@@ -36,6 +36,6 @@ public class ChaRu {
         for (int arr : array) {
             System.out.println(arr);
         }
-
     }
+
 }

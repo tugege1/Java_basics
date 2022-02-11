@@ -5,10 +5,10 @@ package com.cloudbooms.basics_test2022.paixu;
  * @date 2022/2/8 17:38
  */
 public class XuanZe {
+
     public static void main(String[] args) {
 
         int[] array = {8, 5, 4, 2, 9, 7, 6, 3, 1};
-
         for (Integer arr : array) {
             System.out.println(arr);
         }
@@ -36,6 +36,6 @@ public class XuanZe {
         for (Integer arr : array) {
             System.out.println(arr);
         }
-
     }
+
 }
