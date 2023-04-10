@@ -8,10 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 日常代码验证测试
@@ -126,6 +123,29 @@ public class CommonCodeVerify {
                 System.out.println("符合条件");
             }
         }
+
+        //字符串操作空指针 null
+        String isContains = "";
+        System.out.println(isContains.contains("a"));
+
+        //map集合合并 合并集合不能为空
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("1", "aaa");
+        map1.put("2", "bbb");
+        Map<String, Object> map2 = new HashMap<>();
+        //map2.put("3","aaa");
+        //map2.put("2","bbb");
+        System.out.println(map1);
+        map1.putAll(map2);
+        System.out.println(map1);
+
+        //集合引用，可以直接引用
+        List<String> listUse1 = new ArrayList<>();
+        List<String> listUse2 = Arrays.asList("aaa","bbb");
+        listUse1.addAll(listUse2);
+        List<String> listUse3 = listUse1;
+        System.out.println(listUse2);
+        System.out.println(listUse3);
 
     }
 
