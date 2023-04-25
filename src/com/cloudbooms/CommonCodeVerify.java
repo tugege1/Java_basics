@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 日常代码验证测试
@@ -55,12 +56,10 @@ public class CommonCodeVerify {
             System.out.println("aa");
         });
 
-        //集合为空是否可以使用流，报错空指针
+        //集合为空是否可以使用流，报错空指针，空集合不会
         //List<String> strList3 = null;
-        List<String> strList3 = new ArrayList<>();
-        strList3.stream().filter(e -> {
-            return true;
-        });
+        List<String> strList3 = new ArrayList<>(Arrays.asList("aa"));
+        List<String> collect = strList3.stream().filter(e -> "aa".equals(e)).collect(Collectors.toList());
 
         //字符串为空字符串是否可以去空格
         String str = " ";
@@ -146,6 +145,12 @@ public class CommonCodeVerify {
         List<String> listUse3 = listUse1;
         System.out.println(listUse2);
         System.out.println(listUse3);
+
+        //BigDecimal添加空报空指针
+        BigDecimal bigDecimal1 = BigDecimal.ZERO;
+        BigDecimal bigNull = null;
+        BigDecimal bigDecimal2 = bigDecimal1.add(bigNull);
+
 
     }
 
