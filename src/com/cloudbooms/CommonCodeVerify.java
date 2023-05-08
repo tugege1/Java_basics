@@ -140,7 +140,7 @@ public class CommonCodeVerify {
 
         //集合引用，可以直接引用
         List<String> listUse1 = new ArrayList<>();
-        List<String> listUse2 = Arrays.asList("aaa","bbb");
+        List<String> listUse2 = Arrays.asList("aaa", "bbb");
         listUse1.addAll(listUse2);
         List<String> listUse3 = listUse1;
         System.out.println(listUse2);
@@ -148,9 +148,18 @@ public class CommonCodeVerify {
 
         //BigDecimal添加空报空指针
         BigDecimal bigDecimal1 = BigDecimal.ZERO;
-        BigDecimal bigNull = null;
+        BigDecimal bigNull = BigDecimal.ZERO;
         BigDecimal bigDecimal2 = bigDecimal1.add(bigNull);
 
+        //可直接转换
+        List<StudentEntityEO> studentEntityEOList = new ArrayList<>();
+        StudentEntityEO studentEntityEO1 = new StudentEntityEO();
+        studentEntityEO1.setCode("11");
+        studentEntityEO1.setName("张三");
+        studentEntityEO1.setLike("跑步");
+        studentEntityEOList.add(studentEntityEO1);
+        List<StudentEntity> studentEntityList = new ArrayList<>(studentEntityEOList);
+        studentEntityList.forEach(e -> System.out.println(e.getCode() + e.getName()));
 
     }
 
