@@ -161,6 +161,28 @@ public class CommonCodeVerify {
         List<StudentEntity> studentEntityList = new ArrayList<>(studentEntityEOList);
         studentEntityList.forEach(e -> System.out.println(e.getCode() + e.getName()));
 
+        //小数bigdecimal转字符串拼接
+        BigDecimal strFormat = new BigDecimal("50000000001236.333654");
+        String toStr = "限额为" + strFormat + "元";
+        System.out.println(toStr);
+
+        //BigDecimal取余
+        BigDecimal bigDecimalValue = new BigDecimal("100");
+        BigDecimal[] divideAndRemainder = bigDecimalValue.divideAndRemainder(new BigDecimal("3"));
+        System.out.println(divideAndRemainder[0]);
+        System.out.println(divideAndRemainder[1]);
+        System.out.println(divideAndRemainder[1].compareTo(BigDecimal.ZERO) == 0);
+
+        //字符串填充
+        String m = "ER-";
+        for (int i = 0; i < 2; i++) {
+            String format = String.format("%06d", i);
+            System.out.println(m + format);
+        }
+        String formatValue = "000001";
+        String newValue = String.format("%06d", Integer.parseInt(formatValue) + 1);
+        System.out.println(newValue);
+
     }
 
 }
