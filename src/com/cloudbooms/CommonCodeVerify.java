@@ -28,7 +28,7 @@ public class CommonCodeVerify {
         String b = StringUtils.trimWhitespace(a);
         System.out.println(b);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date1 = simpleDateFormat.parse("2022-11-24 00:00:00");
         Date date2 = simpleDateFormat.parse("2052-11-24 00:00:00");
         LocalDateTime localDateTime1 = date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
@@ -146,10 +146,11 @@ public class CommonCodeVerify {
         System.out.println(listUse2);
         System.out.println(listUse3);
 
-        //BigDecimal添加空报空指针
+        //BigDecimal添加，相乘空报空指针
         BigDecimal bigDecimal1 = BigDecimal.ZERO;
         BigDecimal bigNull = BigDecimal.ZERO;
         BigDecimal bigDecimal2 = bigDecimal1.add(bigNull);
+        BigDecimal multiplyNull = new BigDecimal("1").multiply(BigDecimal.ZERO).setScale(2, BigDecimal.ROUND_HALF_UP);
 
         //可直接转换
         List<StudentEntityEO> studentEntityEOList = new ArrayList<>();
@@ -183,6 +184,90 @@ public class CommonCodeVerify {
         String newValue = String.format("%06d", Integer.parseInt(formatValue) + 1);
         System.out.println(newValue);
 
+        //集合转换为逗号隔开的字符串
+        List<String> listTransition = Arrays.asList("1", "2", "3", "4");
+        String transitionStr = String.join(",", listTransition);
+        System.out.println(transitionStr);
+
+        //String拼接null，append添加null，会把null当成字符串拼接，使用空字符串添加则没反应
+        String strNull = "";
+        String strNull2 = null;
+        String strCon1 = "aaa" + strNull + "bbb";
+        System.out.println(strCon1);
+        StringBuilder stringBuilder = new StringBuilder("aaa");
+        stringBuilder.append("bbb").append(strNull).append("ccc");
+        System.out.println(stringBuilder.toString());
+
+        //字符串拼接空格
+        StringBuilder strBuilder = new StringBuilder();
+        strBuilder.append("aaa\n");
+        strBuilder.append("bbb\n");
+        String strConcat = strBuilder.toString();
+        System.out.println(strConcat);
+
+        //使用Calendar进行日期的加减，有两种方式，重新set时间中的某个部分，add直接对时间中的某部分进行加减操作
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        calendar.set(Calendar.DATE, day - 1);
+        String calendarFormat = simpleDateFormat.format(calendar.getTime());
+        System.out.println(calendarFormat);
+        System.out.println("***********************************");
+        System.out.println("***********************************");
+        calendar.add(Calendar.MONTH, -9);
+        String calendarFormat2 = simpleDateFormat.format(calendar.getTime());
+        System.out.println(calendarFormat2);
+
+        //获取月份最后一天，清空，单独操作等
+        Calendar resetCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
+        int year = resetCalendar.get(Calendar.YEAR);
+        int month = resetCalendar.get(Calendar.MONTH);
+        //resetCalendar.set(year, month, resetCalendar.getActualMaximum(Calendar.DAY_OF_MONTH), 23, 59, 59);
+        resetCalendar.set(year, month, resetCalendar.getActualMinimum(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        String resetTime = simpleDateFormat.format(resetCalendar.getTime());
+        System.out.println(resetTime);
+        System.out.println("***********************************");
+        resetCalendar.clear();
+        resetCalendar.set(year, month, 1);
+        resetCalendar.add(Calendar.MONTH, -3);
+        String resetOldTime = simpleDateFormat.format(resetCalendar.getTime());
+        System.out.println(resetOldTime);
+        System.out.println("***********************************");
+        calendar.roll(Calendar.MONTH, -9);
+        String rollTime = simpleDateFormat.format(resetCalendar.getTime());
+        System.out.println(rollTime);
+
+        //集合过滤后为空，map，reduce是否报错，不会，会返回设置的默认值  中途报错为对象属性为空
+        List<StudentEntity> studentEntityStreamTest = new ArrayList<>();
+        StudentEntity studentTest1 = new StudentEntity();
+        studentTest1.setAge(new BigDecimal(2));
+        studentEntityStreamTest.add(studentTest1);
+        StudentEntity studentTest2 = new StudentEntity();
+        studentTest2.setAge(new BigDecimal(1));
+        studentEntityStreamTest.add(studentTest2);
+        BigDecimal sumAge = studentEntityStreamTest.stream().filter(e -> e.getAge().compareTo(new BigDecimal(5)) > 0).map(StudentEntity::getAge).reduce(new BigDecimal(5), BigDecimal::add);
+        System.out.println(sumAge);
+
+        //bigDecimal类型参数传递值是否更新   不会，需要返回
+        BigDecimal big1 = BigDecimal.ZERO;
+        System.out.println(big1);
+
+        //stream去重字符串，字符串为空。会计算为元素
+        List<String> stringDis = Arrays.asList("aaa", null, "", "bbb", "aaa", null, "", "ccc");
+        List<String> strDisList = stringDis.stream().distinct().collect(Collectors.toList());
+        if (strDisList.size() > 1) {
+            System.out.println(strDisList);
+        }
+
+    }
+
+    /**
+     * BigDecimal不能用作参数传递，不会带出去，只有引用类型且非空对象才能传递
+     *
+     * @param big1
+     * @param big2
+     */
+    private void bigValueSet(BigDecimal big1, BigDecimal big2) {
+        BigDecimal add = big1.add(new BigDecimal("3"));
     }
 
 }
