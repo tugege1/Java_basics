@@ -70,21 +70,24 @@ public class CommonCodeVerify {
         System.out.println("bigDecimal" + bigDecimal.toString());
 
         //去除指定字符串 不用管空格，需要注意：要去除的字符串必须在原字符串包含，否则indexOf为-1，会越界
-        StringBuilder newStr = new StringBuilder("qwertyuio");
-        List<String> assignList = Arrays.asList("qw", "t", "io");
+        StringBuilder newStr = new StringBuilder("qwertqwio");
+        List<String> assignList = Arrays.asList("qw", "we", "io");
         for (String assignStr : assignList) {
             if (newStr.toString().contains(assignStr)) {
-                if (newStr.indexOf(assignStr) == 0) {
-                    //在开头
-                    newStr = new StringBuilder(newStr.substring(assignStr.length()));
-                } else if (newStr.indexOf(assignStr) == newStr.length() - assignStr.length()) {
-                    //在结尾
-                    newStr = new StringBuilder(newStr.substring(0, newStr.lastIndexOf(assignStr)));
-                } else if (newStr.indexOf(assignStr) < (newStr.length() - assignStr.length())) {
-                    //在中间
-                    String frontStr = newStr.substring(0, newStr.indexOf(assignStr));
-                    String lastStr = newStr.substring(newStr.indexOf(assignStr) + assignStr.length());
-                    newStr = new StringBuilder(frontStr + lastStr);
+                while (newStr.indexOf(assignStr) != -1) {
+                    int assignIndex = newStr.indexOf(assignStr);
+                    if (assignIndex == 0) {
+                        //在开头
+                        newStr = new StringBuilder(newStr.substring(assignStr.length()));
+                    } else if (assignIndex == newStr.length() - assignStr.length()) {
+                        //在结尾
+                        newStr = new StringBuilder(newStr.substring(0, newStr.lastIndexOf(assignStr)));
+                    } else if (assignIndex < (newStr.length() - assignStr.length())) {
+                        //在中间
+                        String frontStr = newStr.substring(0, assignIndex);
+                        String lastStr = newStr.substring(assignIndex + assignStr.length());
+                        newStr = new StringBuilder(frontStr + lastStr);
+                    }
                 }
             }
         }
@@ -217,12 +220,12 @@ public class CommonCodeVerify {
         String calendarFormat2 = simpleDateFormat.format(calendar.getTime());
         System.out.println(calendarFormat2);
 
-        //获取月份最后一天，清空，单独操作等
-        Calendar resetCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
+        //获取月份最后一天，清空，单独操作等   getActualMaximum使用注意，前面set不会立即生效，需要先clear再set，或者同时set日期
+        Calendar resetCalendar = Calendar.getInstance();
         int year = resetCalendar.get(Calendar.YEAR);
         int month = resetCalendar.get(Calendar.MONTH);
-        //resetCalendar.set(year, month, resetCalendar.getActualMaximum(Calendar.DAY_OF_MONTH), 23, 59, 59);
-        resetCalendar.set(year, month, resetCalendar.getActualMinimum(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        resetCalendar.set(year, month, resetCalendar.getActualMaximum(Calendar.DAY_OF_MONTH), 23, 59, 59);
+        //resetCalendar.set(year, month, resetCalendar.getActualMinimum(Calendar.DAY_OF_MONTH), 0, 0, 0);
         String resetTime = simpleDateFormat.format(resetCalendar.getTime());
         System.out.println(resetTime);
         System.out.println("***********************************");
