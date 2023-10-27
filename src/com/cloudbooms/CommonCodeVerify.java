@@ -247,7 +247,7 @@ public class CommonCodeVerify {
         StudentEntity studentTest2 = new StudentEntity();
         studentTest2.setAge(new BigDecimal(1));
         studentEntityStreamTest.add(studentTest2);
-        BigDecimal sumAge = studentEntityStreamTest.stream().filter(e -> e.getAge().compareTo(new BigDecimal(5)) > 0).map(StudentEntity::getAge).reduce(new BigDecimal(5), BigDecimal::add);
+        BigDecimal sumAge = studentEntityStreamTest.stream().map(StudentEntity::getAge).filter(age -> age.compareTo(new BigDecimal(5)) > 0).reduce(new BigDecimal(5), BigDecimal::add);
         System.out.println(sumAge);
 
         //bigDecimal类型参数传递值是否更新   不会，需要返回
@@ -260,6 +260,27 @@ public class CommonCodeVerify {
         if (strDisList.size() > 1) {
             System.out.println(strDisList);
         }
+
+        //分割出的字符串是否按照顺序，会按照顺序
+        String splitStr = "bbb,ggg,www,222,999";
+        List<String> splitList = Arrays.asList(splitStr.split(","));
+        System.out.println(splitList);
+
+        //判断对象(字段)是否改变，注意Arrays.asList返回的集合不能加减操作   内层循环break，只会跳出当前循环  避免数据计算错误：remove防止外层数据重复,break防止内层数据重复
+        List<String> breakList1 = new ArrayList<>(Arrays.asList("aaa", "aaa", "ccc", "ddd", "eee"));
+        List<String> breakList2 = new ArrayList<>(Arrays.asList("aaa", "bbb", "aaa", "ddd", "ccc"));
+        int count = 0;
+        for (String break1 : breakList1) {
+            for (String break2 : breakList2) {
+                if (break1.equals(break2)) {
+                    count++;
+                    breakList2.remove(break2);
+                    break;
+                }
+            }
+        }
+        boolean ifChange = count == breakList1.size();
+        System.out.println(ifChange);
 
     }
 
