@@ -285,19 +285,21 @@ public class CommonCodeVerify {
         System.out.println(ifChange);
 
         //正则表达式截取指定范围字符串 (?<=exp2)exp1:查询2后面的1   exp1(?=exp2):查询2前面的1   另外，正则中特殊符号要加\   ?表示非贪婪，获取第一个符合要求的数据(.和*默认获取尽可能多的数据)
-        String regexStr = "sdfsd手动阀手动阀\n222退保文书号[1fgvll3525]gggg]\n十分士大夫十分\n333退保文书号[1fgv.3525]gggg";
+        String regexStr = "sdfsd手动阀手动阀\n222退保文书号[123456]\n十分士大夫十分\n333退保文书号[abcdefg]gggg";
         String regex = "(?<=退保文书号\\[).*?(?=\\])";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(regexStr);
         //match可以理解为自带一个循环，每次找到后下次就不在查之前的  循环可以获取多个符合条件的
-       /* while (matcher.find()){
+        /*while (matcher.find()){
             System.out.println(matcher.group());
         }*/
         //直接取，则只会拿第一个符合条件的  matcher.group(0)表示第一个，直接用下标找会越界
         if (matcher.find()) {
+            System.out.println(matcher.group());
             System.out.println(matcher.group(0));
-            System.out.println(matcher.group(1));
+            //System.out.println(matcher.group(1));
         }
+
     }
 
     /**
