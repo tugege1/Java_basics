@@ -300,6 +300,18 @@ public class CommonCodeVerify {
             //System.out.println(matcher.group(1));
         }
 
+        //校验一个字符串是否为纯数字,不能为null    ^开始，0-9标识数字，+标识出现一次或多次，$表示结尾     意思是从开始到结尾都是数字
+        //matches是String的一个方法，用于检测整个字符串是否匹配指定的正则表达式。它允许你在不编写复杂的字符串解析代码的情况下，轻松地验证字符串的格式或内容
+        String mathRegex = "^[0-9]+$";
+        String mathRegexStr1 = "   ";
+        String mathRegexStr2 = " 123  ";
+        String mathRegexStr3 = "123a#";
+        String mathRegexStr4 = "12345";
+        System.out.println(mathRegexStr1.matches(mathRegex));
+        System.out.println(mathRegexStr2.matches(mathRegex));
+        System.out.println(mathRegexStr3.matches(mathRegex));
+        System.out.println(mathRegexStr4.matches(mathRegex));
+
     }
 
     /**
