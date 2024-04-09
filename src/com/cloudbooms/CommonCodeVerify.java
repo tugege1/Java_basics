@@ -312,6 +312,15 @@ public class CommonCodeVerify {
         System.out.println(mathRegexStr3.matches(mathRegex));
         System.out.println(mathRegexStr4.matches(mathRegex));
 
+        //校验对象中的字符串，改变是否影响对象中的字段    不会，字符串每次声明都会使用一个新的地址，StringBuffer和Builder是一个地址
+        StudentEntityEO stuStringValid = new StudentEntityEO();
+        stuStringValid.setName("张三-修改前");
+        String beforeName = stuStringValid.getName();
+        System.out.println(beforeName);
+        beforeName = "张三-修改后";
+        System.out.println(beforeName);
+
+
     }
 
     /**
