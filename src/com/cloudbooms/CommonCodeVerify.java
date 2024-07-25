@@ -320,6 +320,32 @@ public class CommonCodeVerify {
         beforeName = "张三-修改后";
         System.out.println(beforeName);
 
+        String entryStr = null;
+        if (null == entryStr || entryStr.length() == 0) {
+            entryStr = null;
+            entryStr = "张三";
+        } else {
+            entryStr = "里斯";
+        }
+        System.out.println(entryStr);
+
+
+        //返回指定字符的数值，注意字母不分大小写，从A-Z从10到35，中文返回-1
+        String testSignNo = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String testSignNoSmall = "abcdefghijklmnopqrstuvwxyz";
+        //A:10 B:11 C:12 D:13 E:14 F:15 G:16 H:17 I:18 J:19 K:20 L:21
+        //M:22 N:23 O:24 P:25 Q:26 R:27 S:28 T:29 U:30 V:31 W:32 X:33 Y:34 Z:35
+        //String relSignNo = "320509U4JYAC4107";
+        String relSignNo = "320500UG02A70415";
+        int[] weightValue = {1, 3, 5, 7, 11, 2, 13, 1, 1, 17, 19, 97, 23, 29};
+        int[] checkValue = new int[100];
+        int totalValue = 0;
+        for (int i = 0; i < relSignNo.substring(0, 14).length(); i++) {
+            checkValue[i] = Character.getNumericValue(relSignNo.substring(0, 14).charAt(i));
+            totalValue += weightValue[i] * checkValue[i];
+        }
+        int endValue = totalValue % 97 + 1;
+        System.out.println(endValue == Integer.parseInt(relSignNo.substring(14, 16)));
 
     }
 
