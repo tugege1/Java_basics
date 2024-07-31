@@ -335,8 +335,8 @@ public class CommonCodeVerify {
         String testSignNoSmall = "abcdefghijklmnopqrstuvwxyz";
         //A:10 B:11 C:12 D:13 E:14 F:15 G:16 H:17 I:18 J:19 K:20 L:21
         //M:22 N:23 O:24 P:25 Q:26 R:27 S:28 T:29 U:30 V:31 W:32 X:33 Y:34 Z:35
-        //String relSignNo = "320509U4JYAC4107";
-        String relSignNo = "320500UG02A70415";
+        String relSignNo = "320509U4JYAC4107";
+        //String relSignNo = "320500UG02A70415";
         int[] weightValue = {1, 3, 5, 7, 11, 2, 13, 1, 1, 17, 19, 97, 23, 29};
         int[] checkValue = new int[100];
         int totalValue = 0;
@@ -345,7 +345,11 @@ public class CommonCodeVerify {
             totalValue += weightValue[i] * checkValue[i];
         }
         int endValue = totalValue % 97 + 1;
-        System.out.println(endValue == Integer.parseInt(relSignNo.substring(14, 16)));
+        String endStr = String.valueOf(endValue);
+        if (endStr.length() == 1) {
+            endStr = '0' + endStr;
+        }
+        System.out.println(endStr.equals(relSignNo.substring(14, 16)));
 
     }
 
