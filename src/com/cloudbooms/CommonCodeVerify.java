@@ -351,6 +351,41 @@ public class CommonCodeVerify {
         }
         System.out.println(endStr.equals(relSignNo.substring(14, 16)));
 
+
+        //截取List集合中前1000个元素，使用subList（set需变为List有序集合）。  这里模拟10个，注意判断集合长度需大于等于截取长度
+        //切记：Arrays.asList返回的集合不能加减操作，需创建一个集合对象，然后在构造器赋值
+        List<String> subTestList = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"));
+        if (subTestList.size() >= 10) {
+            List<String> tenSubList = subTestList.subList(0, 10);
+            System.out.println("原集合数据：" + subTestList);
+            System.out.println("截取元素数据：" + tenSubList);
+            //获取截取元素之后，原集合仍含有数据（只是返回一个视图），可在操作后调用clear清除原集合数据
+            tenSubList.clear();
+            System.out.println("清除后原集合数据：" + subTestList);
+            System.out.println("清除后截取元素数据：" + tenSubList);
+        } else {
+            System.out.println(subTestList);
+        }
+        System.out.println("-------------------集合截取测试2-----------------------");
+        //--代码演示
+        List<String> subTest2List = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"));
+        do {
+            System.out.println("-------------**循环**-------------");
+            if (subTest2List.size() > 5) {
+                List<String> fiveSubList = subTest2List.subList(0, 5);
+                System.out.println("原集合数据：" + subTest2List);
+                System.out.println("截取元素数据：" + fiveSubList);
+                fiveSubList.clear();
+                System.out.println("清除后原集合数据：" + subTest2List);
+                System.out.println("清除后截取元素数据：" + fiveSubList);
+            } else {
+                System.out.println("原集合数据：" + subTest2List);
+                subTest2List.clear();
+                System.out.println("清除后原集合数据：" + subTest2List);
+            }
+        } while (subTest2List.size() > 0);
+
+
     }
 
     /**
